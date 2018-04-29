@@ -1,13 +1,26 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/addCgi/addCgi"
+    "pages/regeo/regeo",
+    "pages/weather/weather",
+    "pages/poi/poi",
+    "pages/staticmap/staticmap",
+    "pages/navigation_car/navigation",
+    "pages/navigation_bus/navigation",
+    "pages/navigation_walk/navigation",
+    "pages/navigation_ride/navigation",
+    "pages/navigation_car_detail/navigation",
+    "pages/navigation_walk_detail/navigation",
+    "pages/navigation_ride_detail/navigation",
+    "pages/inputtips/input"
   ],
   "window":{
-    "backgroundColor":"#F6F6F6",
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "Wafer Quick Start",
-    "navigationBarTextStyle":"black"
-  }
+    "navigationBarTitleText": "高德开放平台",
+    "navigationBarTextStyle": "white"
+  },
+  "networkTimeout":{
+    "request": 6000
+  },
+  "debug": true
 }
