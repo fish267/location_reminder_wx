@@ -1,0 +1,39 @@
+.site_tag {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid #6d18ff;
+    background: #ffffff;
+    padding: 3px 3px 3px 3px;
+    margin: 2px 2px 2px 2px;
+
+}
+
+.site_tag_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #4A4A4A;
+    border: 0px;
+}
+.site_name{
+    border-bottom: 2px solid #f0f0f0;
+}
+.site_tag_head text {
+    font-size: 15px;
+    align-items: center;
+}
+
+.site_delete {
+    margin-top: 1px;
+    margin-left: 5px;
+}
+.site_tag_footer {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-size: 10px;
+}
+.distance {
+    font-size: 11px;
+    color: brown;
+}

@@ -1,0 +1,30 @@
+<!--
+    文件为小程序主页, 主要有3部分组成:
+    - 提醒站点展示
+    - 提醒开关设置
+    - 站点搜索按钮
+
+    底部分为3个按钮, 首页, 添加自定义站点, 待定 入口
+-->
+<import src="../components/site_tag/site_tag.wxml"/>
+
+<view class="box">
+    <view class="body">
+        <view class="item">
+
+            <template is="site_tag" data="{{site_name:'德力西大厦', site_distance:100}}">11</template>
+            <template is="site_tag" data="{{site_name:'古荡湾新村', site_distance:100}}">11</template>
+        </view>
+        <view class="item">
+            part2
+        </view>
+        <view class="item">
+            part3
+        </view>
+    </view>
+    <view class="footer">
+        <view class="item">
+            底部导航
+        </view>
+    </view>
+</view>

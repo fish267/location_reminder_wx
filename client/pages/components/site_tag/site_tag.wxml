@@ -1,0 +1,19 @@
+<template name="site_tag">
+    <view class="site_tag" data-sitename="{{site_name}}">
+        <view class="site_tag_head">
+            <view class="site_name">
+                <text>{{site_name}}</text>
+            </view>
+            <view class="site_delete" bindtap="delete_site_tag" data-sitename="{{site_name}}">
+                <icon type="cancel" size="14" color="black"/>
+            </view>
+        </view>
+        <view class="site_tag_footer">
+            <tex>
+                距离站点
+                <text class="distance">{{site_distance}}</text>
+                米
+            </tex>
+        </view>
+    </view>
+</template>

@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/location/location",
     "pages/index/index",
     "pages/regeo/regeo",
     "pages/weather/weather",
@@ -12,8 +13,7 @@
     "pages/navigation_car_detail/navigation",
     "pages/navigation_walk_detail/navigation",
     "pages/navigation_ride_detail/navigation",
-    "pages/inputtips/input",
-    "pages/location/location"
+    "pages/inputtips/input"
   ],
   "window":{
     "backgroundTextStyle":"light",
