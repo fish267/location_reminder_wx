@@ -32,6 +32,8 @@
     margin-top: 2px;
     margin-left: 2px;
     font-size: 10px;
+    display: flex;
+    justify-content: flex-end;
 }
 .distance {
     font-size: 11px;

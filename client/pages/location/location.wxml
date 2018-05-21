@@ -11,20 +11,37 @@
 <view class="box">
     <view class="body">
         <view class="item">
-
-            <template is="site_tag" data="{{site_name:'德力西大厦', site_distance:100}}">11</template>
-            <template is="site_tag" data="{{site_name:'古荡湾新村', site_distance:100}}">11</template>
+            <view class="section_one">
+                <view class="section_title">站点提醒</view>
+                <view class="site_remind_list">
+                    <view wx:for="{{markers}}">
+                        <template is="site_tag"
+                                  data="{{site_name:item.name, site_id:item.id,site_distance:item.site_distance}}">11
+                        </template>
+                    </view>
+                </view>
+                <view class="switch">
+                    <view>提醒开关</view>
+                    <view>
+                        <switch checked bindchange="switch1Change"/>
+                    </view>
+                </view>
+            </view>
         </view>
-        <view class="item">
-            part2
-        </view>
-        <view class="item">
-            part3
-        </view>
-    </view>
-    <view class="footer">
-        <view class="item">
-            底部导航
+        <view class="item item2">
+            <view class="section_two">
+                <view class="section_title">添加站点</view>
+                <view>
+                    <view class="section">
+                        <input bindinput="bindInput" placeholder="输入站点"/>
+                    </view>
+                    <view bindtouchstart="bindSearch" data-site_detail="{{i}}" class="text_box" wx:for="{{tips}}"
+                          wx:for-item="i">
+                        <view class="search_result_name">{{i.name}}</view>
+                        <view class="search_result_road">{{i.address}}</view>
+                    </view>
+                </view>
+            </view>
         </view>
     </view>
 </view>

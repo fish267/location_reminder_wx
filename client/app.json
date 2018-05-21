@@ -1,10 +1,10 @@
 {
   "pages":[
     "pages/location/location",
+    "pages/poi/poi",
     "pages/index/index",
     "pages/regeo/regeo",
     "pages/weather/weather",
-    "pages/poi/poi",
     "pages/staticmap/staticmap",
     "pages/navigation_car/navigation",
     "pages/navigation_bus/navigation",
@@ -21,7 +21,33 @@
     "navigationBarTextStyle": "white"
   },
   "networkTimeout":{
-    "request": 6000
+    "request": 3000
+  },
+  "tabBar": {
+    "color": "#6e6d6b",
+    "selectedColor": "#f9f027",
+    "borderStyle": "white",
+    "backgroundColor": "#292929",
+    "list": [
+      {
+        "pagePath": "pages/location/location",
+        "iconPath": "img/footer/footer-icon-02.png",
+        "selectedIconPath": "img/footer/footer-icon-02-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/poi/poi",
+        "iconPath": "img/footer/footer-icon-map.png",
+        "selectedIconPath": "img/footer/footer-icon-map-active.png",
+        "text": "地图"
+      },
+      {
+        "pagePath": "pages/poi/poi",
+        "iconPath": "img/footer/footer-icon-04.png",
+        "selectedIconPath": "img/footer/footer-icon-04-active.png",
+        "text": "我的"
+      }
+    ]
   },
   "debug": true
 }
