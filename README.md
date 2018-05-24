@@ -1,7 +1,7 @@
 ## 配置地址
 1. [高德 API](https://lbs.amap.com/api/wx/guide/get-data/get-inputtips)
 2. [小程序研发文档](https://developers.weixin.qq.com/miniprogram/dev/)
-
+3. AppID(小程序ID)	wxbc24fa3169adc414
 
 ## Change Log
 
@@ -36,4 +36,4 @@
 - 截至目前, 个人认为前端最繁琐的部分是样式
 - 原本打算前端 JS 功能就是 setData 与 ajax 请求, 数据逻辑让 server 处理, 现在只能干写 JS 来玩了
 - 对产品理解, 交互, 视觉设计能力上, 存在明显的短板. 功能都是 YY 后, 开始动手
--
+- 在调试代码时, 发现单词写错耽误了N久!!!

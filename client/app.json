@@ -1,24 +1,18 @@
 {
   "pages":[
+    "pages/site_detail/sitedetail",
     "pages/location/location",
     "pages/poi/poi",
     "pages/index/index",
     "pages/regeo/regeo",
     "pages/weather/weather",
-    "pages/staticmap/staticmap",
-    "pages/navigation_car/navigation",
-    "pages/navigation_bus/navigation",
-    "pages/navigation_walk/navigation",
-    "pages/navigation_ride/navigation",
-    "pages/navigation_car_detail/navigation",
-    "pages/navigation_walk_detail/navigation",
-    "pages/navigation_ride_detail/navigation",
     "pages/inputtips/input"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarTitleText": "高德开放平台",
-    "navigationBarTextStyle": "white"
+    "navigationBarTitleText": "站点提醒",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh":true
   },
   "networkTimeout":{
     "request": 3000
@@ -36,7 +30,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/poi/poi",
+        "pagePath": "pages/site_detail/sitedetail",
         "iconPath": "img/footer/footer-icon-map.png",
         "selectedIconPath": "img/footer/footer-icon-map-active.png",
         "text": "地图"

@@ -23,7 +23,7 @@
                 <view class="switch">
                     <view>提醒开关</view>
                     <view>
-                        <switch checked bindchange="switch1Change"/>
+                        <switch checked bindchange="switchChange"/>
                     </view>
                 </view>
             </view>

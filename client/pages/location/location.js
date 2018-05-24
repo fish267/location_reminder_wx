@@ -1,6 +1,8 @@
 var amapFile = require('../../libs/amap-wx.js');
 var config = require('../../libs/config.js');
-
+var util = require('../../libs/util.js');
+var calculate_distance = util.calculate_distance;
+var set_markers = util.set_markers;
 var key = config.Config.key;
 var MARKERS = 'markers';
 Page({
@@ -32,6 +34,14 @@ Page({
                 var longitude = res.longitude
                 that.setData({latitude: latitude, longitude: longitude});
                 console.log('当前经纬度:' + JSON.stringify(res));
+                wx.setStorage({
+                    key: 'latitude',
+                    data: latitude
+                });
+                wx.setStorage({
+                    key: 'longitude',
+                    data: longitude
+                });
             },
             fail: function (info) {
                 wx.showModal({title: info.errMsg})
@@ -56,20 +66,6 @@ Page({
         })
     },
 
-    // 根据经纬度进行距离运算
-    // 参考资料: https://www.zhihu.com/question/46808125
-    calculate_distance: function (lat1, lng1, lat2, lng2) {
-        var radLat1 = lat1 * Math.PI / 180.0;
-        var radLat2 = lat2 * Math.PI / 180.0;
-        var a = radLat1 - radLat2;
-        var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
-        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
-            Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
-        s = s * 6378.137;
-        s = Math.round(s * 10000) / 10000;
-        // 单位为 m
-        return parseInt(s * 1000, 10);
-    },
 
     // 周报站点搜索
     bindInput: function (e) {
@@ -112,10 +108,10 @@ Page({
                     // 设置显示名称与距离
                     var lng1 = site.location.split(',')[0];
                     var lat1 = site.location.split(',')[1];
-                    site['site_distance'] = that.calculate_distance(lat1, lng1,
+                    site['site_distance'] = calculate_distance(lat1, lng1,
                         that.data.latitude, that.data.longitude);
                     site_list.push(site);
-                    that.setMarkers(site_list);
+                    set_markers(that, site_list);
                 } else if (res.cancel) {
                     console.log('用户点击取消')
                 }
@@ -123,24 +119,7 @@ Page({
         });
 
     },
-    showMarkerInfo: function (data, i) {
-        var that = this;
-        that.setData({
-            textData: {
-                name: data[i].name,
-                desc: data[i].address
-            }
-        });
-    },
-    // 设置 markers, 同步更新到缓存
-    setMarkers: function (site_list) {
-        this.setData({markers: site_list});
-        wx.setStorage({
-            key: MARKERS,
-            data: site_list
-        });
-        console.log('本地缓存: ' + JSON.stringify(wx.getStorageSync(MARKERS)));
-    },
+
     delete_site_tag: function (e) {
         var that = this;
         var site_id = e.currentTarget.dataset.site_id;
@@ -156,7 +135,7 @@ Page({
                         if (site_list[index].id == site_id) {
                             site_list.splice(index, index);
                             console.log('删除站点:' + site_name);
-                            that.setMarkers(site_list);
+                            set_markers(that, site_list);
                         }
                     }
                 } else if (res.cancel) {
@@ -164,5 +143,8 @@ Page({
                 }
             }
         });
+    },
+    switchChange: function () {
+        wx.clearStorage();
     }
-})
+});
