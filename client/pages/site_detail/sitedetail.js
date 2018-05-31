@@ -4,17 +4,20 @@ var key = config.Config.key;
 var MARKERS = 'markers';
 var util = require('../../libs/util.js');
 var calculate_distance = util.calculate_distance;
-var set_markers = util.set_markers;
+var put_storage = util.put_storage;
+var around_location = null;
+var real_longitude = null;
+var real_latitude = null;
+var markers_max_length = 3;
 Page({
     data: {
         markers: [],
         latitude: '',
         longitude: '',
-        real_latitude: '',
-        real_longitude: '',
         textData: {},
         tips: '',
-        scale: '16'
+        scale: '16',
+        map_top: '30px',
     },
     // 页面显示时, 加载收藏的站点
     onLoad: function (e) {
@@ -48,16 +51,15 @@ Page({
         var fe_markers_length = fe_markers.length;
         myAmapFun.getPoiAround({
             querykeywords: e.keywords,
+            location: around_location,
             success: function (data) {
                 var markersDataList = data.markers;
-                for (var index = 0; index < 5; index++) {
+                for (var index = 0; index < markersDataList.length; index++) {
                     //默认返回20个
                     try {
                         var item = markersDataList[index];
                         var temp_location = Object.assign({}, current_location);
-                        if (!item.id) {
-                            item.id = parseInt(Math.random(100) * 100);
-                        }
+
                         temp_location.id = item.id + fe_markers_length;
                         temp_location.longitude = (item.longitude);
                         temp_location.latitude = (item.latitude);
@@ -66,6 +68,9 @@ Page({
                         temp_location.width = 35;
                         temp_location.height = 51;
                         fe_markers.push(temp_location);
+                        if (index > markers_max_length) {
+                            break;
+                        }
                     } catch (error) {
                         console.error(error);
                     }
@@ -100,17 +105,22 @@ Page({
                             var lng1 = site.longitude;
                             var lat1 = site.latitude;
                             site['site_distance'] = calculate_distance(lat1, lng1,
-                                that.data.real_latitude, that.data.real_longitude);
+                                real_latitude, real_longitude);
                             site['location'] = lng1 + ',' + lat1;
                             site['width'] = '';
                             site['height'] = '';
                             site['iconPath'] = '../../img/star.png';
                             site_list.push(site);
-                            // 太困了, 明天修改
+                            // 更改图片logo
+                            fe_markers[index].iconPath = '../../img/star.png';
+                            fe_markers[index].width = '';
+                            fe_markers[index].height = '';
+                            // 将站点添加到缓存
+                            put_storage(site);
+                            // 图片更改后, refresh
                             that.setData({
-                                MARKERS:''
-                            })
-                            set_markers(that, site_list);
+                                markers: fe_markers
+                            });
                         } else if (res.cancel) {
                             console.log('用户点击取消')
                         }
@@ -118,6 +128,7 @@ Page({
                 });
             }
         });
+
     },
     // 设置当前经纬度地址
     setCurrentLocation: function (e) {
@@ -129,7 +140,9 @@ Page({
                     var latitude = res.latitude;
                     var longitude = res.longitude;
                     that.setData({latitude: latitude, longitude: longitude});
-                    that.setData({real_latitude: latitude, real_longitude: longitude});
+                    around_location = longitude + "," + latitude;
+                    real_latitude = latitude;
+                    real_longitude = longitude;
                     console.log('当前经纬度:' + JSON.stringify(res));
                     wx.setStorage({
                         key: 'latitude',
@@ -146,6 +159,7 @@ Page({
             });
         } else {
             var location = e.location.split(',');
+            around_location = location[0] + "," + location[1];
             this.setData({
                 latitude: location[1], longitude: location[0]
             });
@@ -159,7 +173,8 @@ Page({
         var keywords = e.detail.value;
         if (keywords == '') {
             this.setData({
-                tips: []
+                tips: [],
+                map_top: '30px'
             })
         }
         var myAmapFun = new amapFile.AMapWX({key: key});
@@ -171,7 +186,8 @@ Page({
             success: function (data) {
                 if (data && data.tips) {
                     that.setData({
-                        tips: data.tips
+                        tips: data.tips,
+                        map_top: '250px'
                     });
                 }
             }
@@ -190,6 +206,11 @@ Page({
 
     onHide: function () {
         console.log('页面切换, 复位');
-        this.setCurrentLocation();
+    },
+    onPullDownRefresh: function () {
+        console.log('下拉刷新');
+        wx.reLaunch({
+            url: './sitedetail'
+        });
     }
 })

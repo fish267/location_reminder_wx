@@ -23,5 +23,23 @@ module.exports = {
             data: site_list
         });
         console.log('本地缓存: ' + JSON.stringify(wx.getStorageSync(MARKERS)));
+    },
+    // 新增单个站点到缓存
+    put_storage: function (site) {
+        var old_site_list = wx.getStorageSync(MARKERS);
+        if (!old_site_list) {
+            old_site_list = [];
+        }
+        old_site_list.forEach(function (item) {
+            if (item.name == site.name) {
+                console.log('already in storage');
+                return;
+            }
+        });
+        old_site_list.push(site);
+        wx.setStorage({
+            key: MARKERS,
+            data: old_site_list
+        });
     }
 }
