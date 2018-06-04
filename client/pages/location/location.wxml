@@ -9,7 +9,7 @@
 <import src="../components/site_tag/site_tag.wxml"/>
 
 <view class="box">
-    <view class="body">
+    <view class="body" style="min-width:{{min_width*0.9}}px;max-width: {{min_width}}px">
         <view class="item">
             <view class="section_one">
                 <view class="section_title">站点提醒</view>

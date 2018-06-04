@@ -3,6 +3,7 @@
     bottom: 0px;
     left: 0;
     right: 0;
+    margin-top: 7px;
 }
 
 .map {
@@ -15,25 +16,35 @@
     left: 0;
     right: 0;
     bottom: 0px;
-    height: 80px;
+    height: 60px;
     background: #fff;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
-text {
+.site_name {
     margin: 5px 0;
     display: block;
-    font-size: 12px;
-    font: bold;
+    font-size: 14px;
+    font-weight: bold;
+}
+.site_except_name{
+    font-size: 11px;
+    color: #1d1d1d;
 }
 
-.h1 {
-    margin: 15px 0;
-    font-size: 15px;
+.one_line{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+}
+
+.site_type{
+    margin-top: 2px;
+    font-size: 9px;
 }
 
 .section {
-    height: 25px;
+    height: 30px;
     width: 100%;
 }
 
@@ -45,6 +56,7 @@ text {
     border-radius: 7px;
     padding: 0 5px;
     font-size: 11px;
+    background: #f5f5f5;
 }
 
 .text_box {
@@ -77,4 +89,5 @@ text {
 .body {
     flex: 1;
     padding: 1px auto;
+    background: #8EBEFC;
 }

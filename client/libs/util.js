@@ -37,9 +37,15 @@ module.exports = {
             }
         });
         old_site_list.push(site);
+        console.log('缓存新增:' + JSON.stringify(old_site_list));
         wx.setStorage({
             key: MARKERS,
             data: old_site_list
         });
+    },
+    // 生成 n->m的随机整数
+    generate_random: function (n, m) {
+        var c = m - n;
+        return Math.floor(Math.random() * c + n);
     }
 }

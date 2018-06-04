@@ -1,7 +1,8 @@
 {
   "pages":[
-    "pages/site_detail/sitedetail",
     "pages/location/location",
+    "pages/usercenter/usercenter",
+    "pages/site_detail/sitedetail",
     "pages/poi/poi",
     "pages/index/index",
     "pages/regeo/regeo",
@@ -10,9 +11,9 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarTitleText": "站点提醒",
-    "navigationBarTextStyle": "white",
-    "enablePullDownRefresh":true
+    "navigationBarTitleText": "到站提醒",
+    "navigationBarTextStyle":"black",
+    "navigationBarBackgroundColor": "#69C3AA"
   },
   "networkTimeout":{
     "request": 3000
@@ -36,7 +37,7 @@
         "text": "地图"
       },
       {
-        "pagePath": "pages/poi/poi",
+        "pagePath": "pages/usercenter/usercenter",
         "iconPath": "img/footer/footer-icon-04.png",
         "selectedIconPath": "img/footer/footer-icon-04-active.png",
         "text": "我的"

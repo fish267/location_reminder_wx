@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    background: url('https://gw.alipayobjects.com/zos/rmsportal/DIEZUnxDtjIJCEPRpgbo.jpg') no-repeat;
 }
 
 .item {
@@ -13,8 +14,9 @@
     flex-wrap: wrap;
     min-width: 325px;
     border-radius: 7px;
-    background: #ffffff;
+    background: #cdf2ff;
     margin-top: 20px;
+    opacity: 0.93;
 }
 .item2{
     margin-top: 50px;
@@ -37,9 +39,9 @@
 .section_title {
     font-size: 33rpx;
     padding: 13rpx 13rpx;
-    color: #4A4A4A;
+    color: #000000;
     border: 0rpx;
-    border-bottom: 1rpx solid #dddddd;
+    border-bottom: 1rpx solid #f2f2f2;
     margin-bottom: 3px;
 }
 
@@ -63,7 +65,7 @@
 .switch {
     font-size: 33rpx;
     padding: 13rpx 13rpx;
-    color: #989898;
+    color: #6b6b6b;
     display: flex;
     justify-content: space-between;
     align-items: center;

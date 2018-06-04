@@ -12,17 +12,30 @@ Page({
         longitude: '',
         textData: {},
         city: '',
-        site_tag: []
+        site_tag: [],
+        min_width: 400
     },
     // 页面加载时, 获取当前地理位置
     onLoad: function (e) {
-        this.setCurrentLocation();
         var storage_markers = wx.getStorageSync(MARKERS);
         if (storage_markers) {
             this.setData({
                 markers: storage_markers
             });
         }
+        // 设置首页元素宽度, 适配机型
+        this.setDivWidth();
+        this.setCurrentLocation();
+    },
+    // 设置元素宽度
+    setDivWidth: function () {
+        var res = wx.getSystemInfoSync()
+        console.log('设备信息: ' + JSON.stringify(res));
+        var min_width = Math.floor(res.windowWidth);
+        this.setData({
+            min_width: min_width
+        });
+        console.log(this.data);
     },
     // 设置当前经纬度地址
     setCurrentLocation: function () {
@@ -92,6 +105,7 @@ Page({
     // 点击站点, 添加到 MARKERS 与缓存
     bindSearch: function (e) {
         var site = e.currentTarget.dataset.site_detail;
+        console.log(site);
         var site_list = this.data.markers;
         for (var index = 0; index < site_list.length; index++) {
             if (site_list[index].id == site.id) {

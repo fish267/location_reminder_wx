@@ -5,10 +5,12 @@ var MARKERS = 'markers';
 var util = require('../../libs/util.js');
 var calculate_distance = util.calculate_distance;
 var put_storage = util.put_storage;
+var generate_random = util.generate_random;
 var around_location = null;
 var real_longitude = null;
 var real_latitude = null;
 var markers_max_length = 3;
+var loop_interval = 1000;
 Page({
     data: {
         markers: [],
@@ -18,6 +20,8 @@ Page({
         tips: '',
         scale: '16',
         map_top: '30px',
+        site_detail_flag: false,
+        site_detail: {}
     },
     // 页面显示时, 加载收藏的站点
     onLoad: function (e) {
@@ -54,10 +58,12 @@ Page({
             location: around_location,
             success: function (data) {
                 var markersDataList = data.markers;
+                var poiDataList = data.poisData;
                 for (var index = 0; index < markersDataList.length; index++) {
                     //默认返回20个
                     try {
                         var item = markersDataList[index];
+                        var item_poi = poiDataList[index];
                         var temp_location = Object.assign({}, current_location);
 
                         temp_location.id = item.id + fe_markers_length;
@@ -67,6 +73,8 @@ Page({
                         temp_location.name = item.name;
                         temp_location.width = 35;
                         temp_location.height = 51;
+                        temp_location.address = item.address;
+                        temp_location.type = item_poi.type;
                         fe_markers.push(temp_location);
                         if (index > markers_max_length) {
                             break;
@@ -81,10 +89,33 @@ Page({
                 });
             },
             fail: function () {
-                console.error('xxxxxx');
+                console.error('周边站点获取有误');
             },
-
         });
+    },
+    // 循环显示距离收藏站点的距离
+    onReady: function () {
+        var that = this;
+        setInterval(function () {
+            var site_list = wx.getStorageSync(MARKERS) ? wx.getStorageSync(MARKERS) : [];
+            if (site_list.length == 0) {
+                that.setData({site_detail_flag: false});
+                return;
+            } else {
+                var site = site_list[generate_random(0, site_list.length)];
+                var site_detail = {}
+                site_detail.name = site.name;
+                site_detail.address = site.address;
+                site_detail.type = site.type.split(';').pop();
+                site_detail.distance = calculate_distance(real_latitude, real_longitude,
+                    site.latitude, site.longitude);
+                console.log('站点信息展示: ' + JSON.stringify(site_detail));
+                that.setData({
+                    site_detail: site_detail
+                });
+                that.setData({site_detail_flag: true});
+            }
+        }, loop_interval);
     },
     // 点击站点图标, 显示地名, 街道, 距离, 改变icon
     makertap: function (e) {
@@ -96,6 +127,7 @@ Page({
             if (e.markerId == item.id) {
                 console.log('匹配到站点: ' + JSON.stringify(item));
                 var site = Object.assign({}, item);
+                debugger;
                 wx.showModal({
                     title: '添加站点',
                     content: site.name,
@@ -187,7 +219,7 @@ Page({
                 if (data && data.tips) {
                     that.setData({
                         tips: data.tips,
-                        map_top: '250px'
+                        map_top: '300px'
                     });
                 }
             }

@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    border: 1px solid #6d18ff;
-    background: #ffffff;
+    border: 1px solid #c392da;
+    background: #edfcff;
     padding: 3px 3px 3px 3px;
     margin: 2px 2px 2px 2px;
 
@@ -17,11 +17,12 @@
     border: 0px;
 }
 .site_name{
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 1px solid #cbcbcb;
 }
 .site_tag_head text {
     font-size: 15px;
     align-items: center;
+    font-weight: 900;
 }
 
 .site_delete {

@@ -18,10 +18,13 @@
                  scale="{{scale}}" show-location="true" markers="{{markers}}"
                  bindmarkertap="makertap">
 
-
-                <cover-view class="map_text">
-                    <cover-view class="h1">{{textData.name}}</cover-view>
-                    <cover-view>{{textData.desc}}</cover-view>
+                <cover-view wx:if="{{site_detail_flag}}" class="map_text">
+                    <cover-view class="site_name">{{site_detail.name}}</cover-view>
+                    <cover-view class="one_line site_except_name">
+                        <cover-view>距离{{site_detail.distance}}米</cover-view>
+                        <cover-view>{{site_detail.address}}</cover-view>
+                    </cover-view>
+                    <cover-view class="site_except_name site_type">{{site_detail.type}}</cover-view>
                 </cover-view>
             </map>
         </view>
