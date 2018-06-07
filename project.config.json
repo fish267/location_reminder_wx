@@ -37,8 +37,27 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 2,
+			"list": [
+				{
+					"id": 0,
+					"name": "我的",
+					"pathName": "pages/site_detail_page/site_detail_page",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "page_detail",
+					"pathName": "pages/site_detail_page/site_detail_page",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "my",
+					"pathName": "pages/usercenter/usercenter",
+					"query": ""
+				}
+			]
 		}
 	}
 }

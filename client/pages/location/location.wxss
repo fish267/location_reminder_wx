@@ -26,7 +26,10 @@
     flex: 1;
     padding: 10px 10px 0 10px;
 }
-
+.one_line{
+    display: flex;
+    justify-content: space-between;
+}
 .site_remind_list {
     display: flex;
     justify-content: space-around;
@@ -45,6 +48,13 @@
     margin-bottom: 3px;
 }
 
+.clear_site{
+    font-size: 27rpx;
+    padding: 13rpx 13rpx;
+    color: #d03500;
+    border: 0rpx;
+    margin-right: 7px;
+}
 .section_one{
     display: flex;
     flex-direction: column;

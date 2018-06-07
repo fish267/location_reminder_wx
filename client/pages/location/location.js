@@ -5,6 +5,7 @@ var calculate_distance = util.calculate_distance;
 var set_markers = util.set_markers;
 var key = config.Config.key;
 var MARKERS = 'markers';
+var REMIND_DISTANCE = 1000;
 Page({
     data: {
         markers: [],
@@ -13,19 +14,34 @@ Page({
         textData: {},
         city: '',
         site_tag: [],
-        min_width: 400
+        min_width: 400,
+        switch_status: false,
+        poped_window: false,
+        clear_button_flag: true
     },
     // 页面加载时, 获取当前地理位置
     onLoad: function (e) {
+        this.setCurrentLocation();
         var storage_markers = wx.getStorageSync(MARKERS);
-        if (storage_markers) {
+        if (storage_markers && storage_markers.length > 0) {
             this.setData({
                 markers: storage_markers
             });
+        } else {
+            this.setData({
+                clear_button_flag: false
+            })
         }
         // 设置首页元素宽度, 适配机型
         this.setDivWidth();
-        this.setCurrentLocation();
+        // 初始化提醒按钮
+        var switch_status = wx.getStorageSync('switch_status');
+        if (switch_status) {
+            this.setData({
+                switch_status: true
+            });
+        }
+
     },
     // 设置元素宽度
     setDivWidth: function () {
@@ -76,7 +92,72 @@ Page({
                 //失败回调
                 console.error(info);
             }
-        })
+        });
+        // 轮询当前位置, 更新距离到缓存
+        setInterval(function () {
+            var raw_site_list = wx.getStorageSync(MARKERS) ? wx.getStorageSync(MARKERS) : [];
+            if (raw_site_list.length == 0) {
+                that.setData({
+                    clear_button_flag: false
+                })
+                return;
+            } else {
+                // 将当前位置放到缓存
+                that.setCurrentLocation();
+                var longitude = wx.getStorageSync('longitude');
+                var latitude = wx.getStorageSync('latitude');
+                var site_list = [];
+                raw_site_list.forEach(function (item) {
+                    var site = Object.assign({}, item);
+                    site['site_distance'] = calculate_distance(
+                        latitude, longitude, item.latitude, item.longitude
+                    );
+                    site_list.push(site);
+                });
+                that.setData({
+                    markers: site_list
+                });
+                that.setData({
+                    clear_button_flag: true
+                });
+                set_markers(that, site_list);
+            }
+        }, 5000);
+        // 轮询设置的站点, 进行弹层抖动提示
+        setInterval(function () {
+            var raw_site_list = wx.getStorageSync(MARKERS) ? wx.getStorageSync(MARKERS) : [];
+            if (raw_site_list.length == 0 || !that.data.switch_status) {
+                return;
+            } else {
+                raw_site_list.forEach(function (item) {
+                    var switch_status = wx.getStorageSync('switch_status');
+                    if (item.site_distance <= REMIND_DISTANCE && switch_status) {
+                        wx.vibrateLong();
+                        if (!that.data.poped_window) {
+                            wx.showModal({
+                                title: '站点提醒',
+                                content: '距离' + item.name + item.site_distance + '米',
+                                success: function (res) {
+                                    if (res.confirm) {
+                                        console.log('用户点击确定')
+                                        that.setData({
+                                            switch_status: false,
+
+                                        });
+                                        wx.setStorageSync('switch_status', false);
+                                    } else if (res.cancel) {
+                                        console.log('用户点击取消')
+                                    }
+                                }
+                            })
+                            that.setData({
+                                poped_window: true,
+                            })
+                        }
+                    }
+                });
+            }
+        }, 2000);
     },
 
 
@@ -95,6 +176,7 @@ Page({
             datatype: 'poi',
             success: function (data) {
                 if (data && data.tips) {
+                    console.log("站点查询:" + JSON.stringify(data));
                     that.setData({
                         tips: data.tips
                     });
@@ -124,6 +206,10 @@ Page({
                     var lat1 = site.location.split(',')[1];
                     site['site_distance'] = calculate_distance(lat1, lng1,
                         that.data.latitude, that.data.longitude);
+                    site.latitude = lat1;
+                    site.longitude = lng1;
+                    // 当前模式, 无法获取站点类型
+                    site.type = '生活服务';
                     site_list.push(site);
                     set_markers(that, site_list);
                 } else if (res.cancel) {
@@ -145,20 +231,57 @@ Page({
                 if (res.confirm) {
                     console.log('用户点击确定')
                     var site_list = that.data.markers;
+                    var ret_list = [];
                     for (var index = 0; index < site_list.length; index++) {
                         if (site_list[index].id == site_id) {
-                            site_list.splice(index, index);
                             console.log('删除站点:' + site_name);
-                            set_markers(that, site_list);
+                        } else {
+                            ret_list.push(site_list[index]);
                         }
                     }
+                    set_markers(that, ret_list);
                 } else if (res.cancel) {
                     console.log('用户点击取消')
                 }
             }
         });
     },
-    switchChange: function () {
-        wx.clearStorage();
+    switchChange: function (e) {
+        console.log('switchChange 事件，值:', e.detail.value);
+        var that = this;
+        if (e.detail.value) {
+            this.setData({
+                switch_status: true,
+                poped_window: false
+            });
+        } else {
+            this.setData({
+                switch_status: false
+            });
+        }
+        wx.setStorage({
+            key: 'switch_status',
+            data: e.detail.value,
+        });
+
+    },
+    clear_site: function () {
+        var that = this;
+        if (this.data.markers.length == 0) {
+            return;
+        }
+        wx.showModal({
+            title: '提醒',
+            content: '清空所有站点?',
+            success: function (res) {
+                if (res.confirm) {
+                    that.setData({
+                        markers: []
+                    });
+                    set_markers(that, []);
+                    console.log('用户点击确定')
+                }
+            }
+        });
     }
 });

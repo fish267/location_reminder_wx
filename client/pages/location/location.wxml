@@ -12,7 +12,10 @@
     <view class="body" style="min-width:{{min_width*0.9}}px;max-width: {{min_width}}px">
         <view class="item">
             <view class="section_one">
-                <view class="section_title">站点提醒</view>
+                <view class="one_line">
+                    <view class="section_title">站点提醒</view>
+                    <view class="clear_site" wx:if='{{clear_button_flag}}' bindtap="clear_site">清空</view>
+                </view>
                 <view class="site_remind_list">
                     <view wx:for="{{markers}}">
                         <template is="site_tag"
@@ -23,7 +26,7 @@
                 <view class="switch">
                     <view>提醒开关</view>
                     <view>
-                        <switch checked bindchange="switchChange"/>
+                        <switch checked='{{switch_status}}' bindchange="switchChange"/>
                     </view>
                 </view>
             </view>

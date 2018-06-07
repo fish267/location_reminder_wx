@@ -10,7 +10,7 @@ var around_location = null;
 var real_longitude = null;
 var real_latitude = null;
 var markers_max_length = 3;
-var loop_interval = 1000;
+var loop_interval = 3000;
 Page({
     data: {
         markers: [],
@@ -127,7 +127,6 @@ Page({
             if (e.markerId == item.id) {
                 console.log('匹配到站点: ' + JSON.stringify(item));
                 var site = Object.assign({}, item);
-                debugger;
                 wx.showModal({
                     title: '添加站点',
                     content: site.name,
@@ -229,9 +228,9 @@ Page({
     bindSearch: function (e) {
         var site_location = e.currentTarget.dataset.site_detail.location;
         var keywords = e.currentTarget.dataset.site_detail.name;
-        var url = './sitedetail?location=' + site_location + '&keywords=' + keywords;
+        var url = '../site_detail_page/site_detail_page?location=' + site_location + '&keywords=' + keywords;
         console.log('站点跳转: ' + url)
-        wx.reLaunch({
+        wx.redirectTo({
             url: url
         });
     },

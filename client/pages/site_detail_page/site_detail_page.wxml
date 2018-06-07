@@ -1,0 +1,33 @@
+<view class="box">
+    <view class="body">
+        <view class="section">
+                <input bindinput="bindInput" placeholder="输入站点"/>
+                <text bindtap="return_site_detail">返回</text>
+        </view>
+        <view class="result_list">
+            <view bindtouchstart="bindSearch"
+                  data-site_detail="{{i}}"
+                  class="text_box"
+                  wx:for="{{tips}}"
+                  wx:for-item="i">
+                <view class="search_result_name">{{i.name}}</view>
+                <view class="search_result_road">{{i.address}}</view>
+            </view>
+        </view>
+        <view class="map_container" style="top:{{map_top}}">
+            <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}"
+                 scale="{{scale}}" show-location="true" markers="{{markers}}"
+                 bindmarkertap="makertap">
+
+                <cover-view wx:if="{{site_detail_flag}}" class="map_text">
+                    <cover-view class="site_name">{{site_detail.name}}</cover-view>
+                    <cover-view class="one_line site_except_name">
+                        <cover-view>距离{{site_detail.distance}}米</cover-view>
+                        <cover-view>{{site_detail.address}}</cover-view>
+                    </cover-view>
+                    <cover-view class="site_except_name site_type">{{site_detail.type}}</cover-view>
+                </cover-view>
+            </map>
+        </view>
+    </view>
+</view>
