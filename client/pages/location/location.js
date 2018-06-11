@@ -62,7 +62,7 @@ Page({
                 var latitude = res.latitude
                 var longitude = res.longitude
                 that.setData({latitude: latitude, longitude: longitude});
-                console.log('当前经纬度:' + JSON.stringify(res));
+                // console.log('当前经纬度:' + JSON.stringify(res));
                 wx.setStorage({
                     key: 'latitude',
                     data: latitude
@@ -138,16 +138,10 @@ Page({
                                 title: '站点提醒',
                                 content: '距离' + item.name + item.site_distance + '米',
                                 success: function (res) {
-                                    if (res.confirm) {
-                                        console.log('用户点击确定')
-                                        that.setData({
-                                            switch_status: false,
-
-                                        });
-                                        wx.setStorageSync('switch_status', false);
-                                    } else if (res.cancel) {
-                                        console.log('用户点击取消')
-                                    }
+                                    that.setData({
+                                        switch_status: false,
+                                    });
+                                    wx.setStorageSync('switch_status', false);
                                 }
                             })
                             that.setData({

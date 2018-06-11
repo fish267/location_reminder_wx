@@ -22,7 +22,7 @@ module.exports = {
             key: MARKERS,
             data: site_list
         });
-        console.log('本地缓存: ' + JSON.stringify(wx.getStorageSync(MARKERS)));
+        // console.log('本地缓存: ' + JSON.stringify(wx.getStorageSync(MARKERS)));
     },
     // 新增单个站点到缓存
     put_storage: function (site) {
