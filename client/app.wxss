@@ -1,5 +1,3 @@
-@import "./pages/components/@zanui/index.wxss";
-
 page {
     font-family: PingFang SC, -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
     background: #4D8AD7;

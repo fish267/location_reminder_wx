@@ -76,6 +76,9 @@ Page({
                 wx.showModal({title: info.errMsg})
             }
         });
+        // 设置提醒阈值
+        var alert_distance = wx.getStorageSync('alert_distance');
+        REMIND_DISTANCE = alert_distance ? alert_distance : 1000;
     },
     // 设置城市
     onReady: function (e) {
@@ -160,6 +163,9 @@ Page({
         var that = this;
         var keywords = e.detail.value;
         if (keywords == '') {
+            that.setData({
+                tips: []
+            });
             return;
         }
         var myAmapFun = new amapFile.AMapWX({key: key});

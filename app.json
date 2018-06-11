@@ -1,19 +1,10 @@
 {
   "pages":[
-    "pages/index/index",
-    "pages/regeo/regeo",
-    "pages/weather/weather",
-    "pages/poi/poi",
-    "pages/staticmap/staticmap",
-    "pages/navigation_car/navigation",
-    "pages/navigation_bus/navigation",
-    "pages/navigation_walk/navigation",
-    "pages/navigation_ride/navigation",
-    "pages/navigation_car_detail/navigation",
-    "pages/navigation_walk_detail/navigation",
-    "pages/navigation_ride_detail/navigation",
-    "pages/inputtips/input",
-    "pages/components/site_tag/site_tag"
+    "pages/location/location",
+    "pages/usercenter/usercenter",
+    "pages/site_detail/sitedetail",
+    "pages/site_detail_page/site_detail_page",
+    "pages/index/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -13,12 +13,14 @@ Page({
         score_sign_continuous: 0,
         iconSize: 45,
         iconColor: '#999999',
-        element_flag: false,
-        weather: {}
+        weather: {},
     },
     data: {},
     onLoad: function () {
         var that = this;
+        that.setData({
+            showModal: false
+        });
         var myAmapFun = new amapFile.AMapWX({key: key});
         myAmapFun.getWeather({
             success: function (data) {
@@ -31,13 +33,22 @@ Page({
                 // wx.showModal({title:info.errMsg})
             }
         })
+
     },
-    show_todo: function () {
-        wx.showToast({
-            title: '还在建设',
-            icon: 'loading',
-            duration: 1000
-        })
+    show_alert_distance: function () {
+        var alert_distance = wx.getStorageSync('alert_distance');
+        if (!alert_distance) {
+            this.setData({
+                alert_distance: 1000
+            })
+        } else {
+            this.setData({
+                alert_distance: alert_distance
+            })
+        }
+        this.setData({
+            showModal: true
+        });
     },
     show_collection: function () {
         wx.showToast({
@@ -94,5 +105,25 @@ Page({
             duration: 1000
         })
     },
-
+    input_finish: function (e) {
+        this.setData({
+            inputValue: e.detail.value
+        });
+    },
+    modal_confirm: function () {
+        var alert_distance = this.data.inputValue;
+        if(!alert_distance){
+            alert_distance = this.data.alert_distance;
+        }
+        console.log('存入缓存, alert_distance=' + alert_distance);
+        wx.setStorageSync('alert_distance', Math.floor(alert_distance));
+        this.setData({
+            showModal: false
+        })
+    },
+    modal_cancel: function () {
+        this.setData({
+            showModal: false
+        })
+    }
 })
