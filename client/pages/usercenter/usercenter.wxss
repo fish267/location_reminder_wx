@@ -196,3 +196,14 @@ page {
 	font-size: 24rpx;
 	text-align: center;
 }
+.weather{
+  width: 100%;
+  background: #4dadfa;
+  color: #fff;
+  font-size: 13px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.weather text{
+}

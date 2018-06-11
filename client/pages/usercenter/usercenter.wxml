@@ -28,6 +28,11 @@
     </view>
 
     <view class='h-contents'>
+        <view class="weather">
+            <text>
+                {{weather.city}}实时天气 :  {{weather.weather}}    气温   {{weather.temperature}}℃    空气湿度   {{weather.humidity}}%
+            </text>
+        </view>
         <view wx:if="{{element_flag}}">
             <view class='a-item'>
                 <wxc-icon type='purse' size='{{iconSize-10}}' color='#69C3AA'
@@ -124,8 +129,8 @@
         </view>
         <view class="item no-border-bottom">
             <button open-type="contact" class="button_content a" size="mini">
-                <navigator url="/pages/ucenter/feedback/feedback" hover-class="none" >
-                    <view  class="remark_icon">
+                <navigator url="/pages/ucenter/feedback/feedback" hover-class="none">
+                    <view class="remark_icon">
                         <wxc-icon type='comment' size='{{iconSize}}' color='{{iconColor}}'
                                   style='margin:15rpx 0 10rpx 0;'></wxc-icon>
                         <text class="txt">反馈</text>

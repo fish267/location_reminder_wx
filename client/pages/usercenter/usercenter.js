@@ -1,5 +1,7 @@
+var config = require('../../libs/config.js');
+var amapFile = require('../../libs/amap-wx.js');
+var key = config.Config.key;
 const app = getApp()
-
 Page({
     data: {
         aboutUsTitle: '',
@@ -11,11 +13,24 @@ Page({
         score_sign_continuous: 0,
         iconSize: 45,
         iconColor: '#999999',
-        element_flag: false
+        element_flag: false,
+        weather: {}
     },
     data: {},
     onLoad: function () {
-
+        var that = this;
+        var myAmapFun = new amapFile.AMapWX({key: key});
+        myAmapFun.getWeather({
+            success: function (data) {
+                that.setData({
+                    weather: data.liveData
+                });
+                console.log('天气数据:' + JSON.stringify(data));
+            },
+            fail: function (info) {
+                // wx.showModal({title:info.errMsg})
+            }
+        })
     },
     show_todo: function () {
         wx.showToast({
