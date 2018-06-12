@@ -32,7 +32,7 @@
             <view style="display: flex; flex-direction: row;">
                 <text decode="{{true}}">距离小于&nbsp;&nbsp;</text>
                 <input class="weui-input" placeholder-style="color:#F76260" auto-focus type="number"
-                       placeholder="{{alert_distance}}" bindblur="input_finish"/>米时进行提醒!
+                       placeholder="{{alert_distance}}" bindinput="input_finish"/>米时进行提醒!
             </view>
         </modal>
     </view>
