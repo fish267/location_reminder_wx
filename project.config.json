@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -55,6 +55,18 @@
 					"id": -1,
 					"name": "my",
 					"pathName": "pages/usercenter/usercenter",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "site_detail",
+					"pathName": "pages/site_detail/sitedetail",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "site_detail_page",
+					"pathName": "pages/site_detail_page/site_detail_page",
 					"query": ""
 				}
 			]

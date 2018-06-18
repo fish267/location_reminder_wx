@@ -3,7 +3,7 @@
     bottom: 0px;
     left: 0;
     right: 0;
-    margin-top: 7px;
+    margin-top: 11px;
 }
 
 .map {
@@ -45,18 +45,22 @@
 
 .section {
     height: 30px;
-    width: 100%;
+    width: 95%;
+    background:  #51b8fb;
+    padding:  5px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: left;
 }
 
 .section input {
-    width: 95%;
+    width: 83%;
     margin: 2px 2px;
-    border: 2px solid #5422f5;
     height: 30px;
-    border-radius: 7px;
-    padding: 0 5px;
+    border-radius: 10px;
     font-size: 11px;
     background: #f5f5f5;
+    padding-left: 13px;
 }
 
 .text_box {
@@ -89,5 +93,5 @@
 .body {
     flex: 1;
     padding: 1px auto;
-    background: #8EBEFC;
+    background: #51b8fb;
 }

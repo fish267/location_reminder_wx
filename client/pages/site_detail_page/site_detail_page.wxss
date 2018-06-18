@@ -48,13 +48,13 @@
     width: 100%;
     display: flex;
     align-items: center;
-    align-content: ;
+    background: #51b8fb;
+    padding: 5px;
 }
 
 .section input {
     width: 82%;
     margin: 2px 2px;
-    border: 2px solid #5422f5;
     height: 30px;
     border-radius: 7px;
     padding: 0 5px;
@@ -64,10 +64,10 @@
 .section text{
     align-content: right;
     margin: 1px;
-    border-radius: 3px;
-    border: 1px solid #edfcff;
-    font-weight: 900;
     padding: 1px;
+    font-size: 13px;
+    color: white;
+    font-weight: 300;
 }
 .text_box {
     margin: 10px 25px;
@@ -99,5 +99,5 @@
 .body {
     flex: 1;
     padding: 1px auto;
-    background: #8EBEFC;
+    background: #51b8fb;
 }

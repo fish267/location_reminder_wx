@@ -1,7 +1,9 @@
 <view class="box">
     <view class="body">
         <view class="section">
-            <input bindinput="bindInput" placeholder="输入站点"/>
+            <input bindinput="bindInput" auto-focus="true"  placeholder="输入站点"/>
+            <icon style="margin-left: 7px;margin-top: 6px"
+                    color='white' size="23" type="search"></icon>
         </view>
         <view class="result_list">
             <view bindtouchstart="bindSearch"
