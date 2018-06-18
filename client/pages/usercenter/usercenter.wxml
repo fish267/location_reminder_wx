@@ -20,8 +20,8 @@
 
     <view class='h-contents'>
         <view class="weather">
-            <text>
-                {{weather.city}}实时天气 : {{weather.weather}} 气温 {{weather.temperature}}℃ 空气湿度 {{weather.humidity}}%
+            <text decode="{{true}}">
+                {{weather.city}}天气 &nbsp;&nbsp;{{weather.weather}} &nbsp;&nbsp;气温 {{weather.temperature}}℃ &nbsp;&nbsp;空气湿度 {{weather.humidity}}%
             </text>
         </view>
     </view>
@@ -36,6 +36,17 @@
             </view>
         </modal>
     </view>
+    <view>
+        <modal title="到站提醒分享" style="min-height:200px" wx:if="{{showShareModal}}"
+               bindconfirm="share_confirm" bindcancel="share_confirm" >
+            <view>
+                <text>1. 微信扫码二维码</text>
+                <view class="share_img" style>
+                </view>
+                <text>2. 点击右上角-->选择"转发", 分享给好友</text>
+            </view>
+        </modal>
+    </view>
     <view class="user-menu">
         <view class="item a" bindtap="show_alert_distance">
             <view url="/pages/ucenter/order-list/index" hover-class="none" class="a">
@@ -44,11 +55,11 @@
                 <text class="txt">提醒设置</text>
             </view>
         </view>
-        <view class="item" bindtap="show_collection">
-            <view url="/pages/select-address/index" hover-class="none" class="a">
-                <wxc-icon type='address' size='{{iconSize}}' color='{{iconColor}}'
+        <view class="item" bindtap="show_share">
+            <view  hover-class="none" class="a">
+                <wxc-icon type='share' size='{{iconSize}}' color='{{iconColor}}'
                           style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-                <text class="txt" style='color:lightgray;text-decoration: line-through;'>收藏地址</text>
+                <text class="txt" >分享</text>
             </view>
         </view>
         <view class="item no-border-right" bindtap="show_current_location">

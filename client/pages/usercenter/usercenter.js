@@ -14,6 +14,7 @@ Page({
         iconSize: 45,
         iconColor: '#999999',
         weather: {},
+        showShareModal: false
     },
     data: {},
     onLoad: function () {
@@ -50,11 +51,9 @@ Page({
             showModal: true
         });
     },
-    show_collection: function () {
-        wx.showToast({
-            title: '还在建设',
-            icon: 'loading',
-            duration: 1000
+    show_share: function () {
+        this.setData({
+            showShareModal: true
         })
     },
 
@@ -109,11 +108,11 @@ Page({
         this.setData({
             inputValue: e.detail.value
         });
-        console.log('距离设置='+ e.detail.value);
+        console.log('距离设置=' + e.detail.value);
     },
     modal_confirm: function () {
         var alert_distance = this.data.inputValue;
-        if(!alert_distance){
+        if (!alert_distance) {
             alert_distance = this.data.alert_distance;
         }
         console.log('存入缓存, alert_distance=' + alert_distance);
@@ -131,5 +130,11 @@ Page({
         return {
             title: '到站提醒小程序',
         }
+    },
+
+    share_confirm: function () {
+        this.setData({
+            showShareModal: false
+        })
     }
 })

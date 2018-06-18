@@ -89,7 +89,7 @@ page {
 
 .h-contents{
   width: 100%;
-  height: 125rpx;
+  height: 95rpx;
   margin-top: 8rpx;
   background-color: #FFF;
   display: flex;
@@ -187,7 +187,7 @@ page {
 }
 .weather{
   width: 100%;
-  background: #4dadfa;
+  background: #51b8fb;
   color: #fff;
   font-size: 13px;
   display: flex;
@@ -198,4 +198,9 @@ page {
   width: 55px;
   font-weight: 900;
     color: #ff1d46;
+}
+.share_img{
+  height: 170px;
+  background: url("https://gw.alipayobjects.com/zos/rmsportal/NiYgNTjGsGfdqAIEOdDy.jpg")no-repeat;
+  margin-left: 17%;
 }
