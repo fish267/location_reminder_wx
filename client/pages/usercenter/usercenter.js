@@ -109,6 +109,7 @@ Page({
         this.setData({
             inputValue: e.detail.value
         });
+        console.log('距离设置='+ e.detail.value);
     },
     modal_confirm: function () {
         var alert_distance = this.data.inputValue;
@@ -125,5 +126,10 @@ Page({
         this.setData({
             showModal: false
         })
+    },
+    onShareAppMessage: function (res) {
+        return {
+            title: '到站提醒小程序',
+        }
     }
 })

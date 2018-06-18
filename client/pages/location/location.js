@@ -283,5 +283,10 @@ Page({
                 }
             }
         });
+    },
+    onShareAppMessage: function (res) {
+        return {
+            title: '到站提醒小程序',
+        }
     }
 });

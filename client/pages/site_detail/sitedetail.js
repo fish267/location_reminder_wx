@@ -109,7 +109,7 @@ Page({
                 site_detail.type = site.type.split(';').pop();
                 site_detail.distance = calculate_distance(real_latitude, real_longitude,
                     site.latitude, site.longitude);
-                console.log('站点信息展示: ' + JSON.stringify(site_detail));
+                // console.log('站点信息展示: ' + JSON.stringify(site_detail));
                 that.setData({
                     site_detail: site_detail
                 });
@@ -243,5 +243,10 @@ Page({
         wx.reLaunch({
             url: './sitedetail'
         });
+    },
+    onShareAppMessage: function (res) {
+        return {
+            title: '到站提醒小程序',
+        }
     }
 })
