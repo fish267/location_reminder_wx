@@ -21,7 +21,7 @@
     <view class='h-contents'>
         <view class="weather">
             <text decode="{{true}}">
-                {{weather.city}}天气 &nbsp;&nbsp;{{weather.weather}} &nbsp;&nbsp;气温 {{weather.temperature}}℃ &nbsp;&nbsp;空气湿度 {{weather.humidity}}%
+                {{weather.city}}天气 &nbsp;{{weather.weather}} &nbsp;&nbsp;气温 {{weather.temperature}}℃ &nbsp;&nbsp;空气湿度 {{weather.humidity}}%
             </text>
         </view>
     </view>
