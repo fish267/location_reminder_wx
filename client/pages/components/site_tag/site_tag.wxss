@@ -38,5 +38,4 @@
 }
 .distance {
     font-size: 11px;
-    color: brown;
 }

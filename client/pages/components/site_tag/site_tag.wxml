@@ -9,7 +9,7 @@
             </view>
         </view>
         <view class="site_tag_footer">
-            <view>距离 <text class="distance">{{site_distance}}</text>米</view>
+            <view>距离 <text class="distance" style="color: {{site_distance>1000? 'green':'red'}}">{{site_distance}}</text> 米</view>
         </view>
     </view>
 </template>
