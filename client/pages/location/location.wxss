@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    background: url('https://gw.alipayobjects.com/zos/rmsportal/DIEZUnxDtjIJCEPRpgbo.jpg') no-repeat;
+    background: url('https://gw.alipayobjects.com/zos/rmsportal/ROTOShIztEbdXqbMAlCw.png') repeat;
 }
 
 .item {
@@ -14,9 +14,8 @@
     flex-wrap: wrap;
     min-width: 325px;
     border-radius: 7px;
-    background: #cdf2ff;
+    background: rgba(205, 242, 255, 0.62);
     margin-top: 20px;
-    opacity: 0.93;
 }
 .item2{
     margin-top: 50px;

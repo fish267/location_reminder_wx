@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "到站提醒",
-  "navigationBarBackgroundColor": "#6FD1F1"
+  "navigationBarBackgroundColor": "#3572F9",
+  "navigationBarTextStyle": "white"
 }

@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "站点",
-  "navigationBarBackgroundColor": "#51b8fb"
+  "navigationBarBackgroundColor": "#51b8fb",
+  "navigationBarTextStyle": "white"
 }
