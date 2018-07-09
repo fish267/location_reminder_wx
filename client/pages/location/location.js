@@ -3,6 +3,7 @@ var config = require('../../libs/config.js');
 var util = require('../../libs/util.js');
 var calculate_distance = util.calculate_distance;
 var set_markers = util.set_markers;
+var filter_empty_location = util.filter_empty_location;
 var key = config.Config.key;
 var MARKERS = 'markers';
 var REMIND_DISTANCE = 1000;
@@ -73,7 +74,7 @@ Page({
                 });
             },
             fail: function (info) {
-                wx.showModal({title: info.errMsg})
+                wx.showToast({title: info.errMsg, icon: 'loading', duration: 500});
             }
         });
         // 设置提醒阈值
@@ -173,14 +174,11 @@ Page({
             keywords: keywords,
             location: that.data.longitude + ',' + that.data.latitude,
             city: that.data.city,
-            datatype: 'poi',
+            // datatype: 'poi',
             success: function (data) {
-                if (data && data.tips) {
-                    console.log("站点查询:" + JSON.stringify(data));
-                    that.setData({
-                        tips: data.tips
-                    });
-                }
+                that.setData({
+                    tips: filter_empty_location(data)
+                });
             }
         })
     },

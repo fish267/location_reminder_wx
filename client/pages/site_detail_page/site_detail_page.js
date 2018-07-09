@@ -9,7 +9,7 @@ var generate_random = util.generate_random;
 var around_location = null;
 var real_longitude = null;
 var real_latitude = null;
-var markers_max_length = 3;
+var markers_max_length = 17;
 var loop_interval = 3000;
 Page({
     data: {
@@ -18,7 +18,7 @@ Page({
         longitude: '',
         textData: {},
         tips: '',
-        scale: '16',
+        scale: '18',
         map_top: '30px',
         site_detail_flag: false,
         site_detail: {}
@@ -61,6 +61,9 @@ Page({
                 var poiDataList = data.poisData;
                 for (var index = 0; index < markersDataList.length; index++) {
                     //默认返回20个
+                    if (index > markers_max_length) {
+                        break;
+                    }
                     try {
                         var item = markersDataList[index];
                         var item_poi = poiDataList[index];
@@ -76,9 +79,6 @@ Page({
                         temp_location.address = item.address;
                         temp_location.type = item_poi.type;
                         fe_markers.push(temp_location);
-                        if (index > markers_max_length) {
-                            break;
-                        }
                     } catch (error) {
                         console.error(error);
                     }
@@ -185,7 +185,7 @@ Page({
                     });
                 },
                 fail: function (info) {
-                    wx.showModal({title: info.errMsg})
+                    wx.showToast({title: info.errMsg, icon: 'loading', duration: 500});
                 }
             });
         } else {

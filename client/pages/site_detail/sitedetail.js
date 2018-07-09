@@ -6,11 +6,13 @@ var util = require('../../libs/util.js');
 var calculate_distance = util.calculate_distance;
 var put_storage = util.put_storage;
 var generate_random = util.generate_random;
+var filter_empty_location = util.filter_empty_location;
 var around_location = null;
 var real_longitude = null;
 var real_latitude = null;
-var markers_max_length = 3;
+var markers_max_length = 17;
 var loop_interval = 3000;
+var SEARCH_RADIUS = 1000;
 Page({
     data: {
         markers: [],
@@ -18,7 +20,7 @@ Page({
         longitude: '',
         textData: {},
         tips: '',
-        scale: '16',
+        scale: '19',
         map_top: '30px',
         site_detail_flag: false,
         site_detail: {}
@@ -56,11 +58,15 @@ Page({
         myAmapFun.getPoiAround({
             querykeywords: e.keywords,
             location: around_location,
+            radius: SEARCH_RADIUS,
             success: function (data) {
                 var markersDataList = data.markers;
                 var poiDataList = data.poisData;
                 for (var index = 0; index < markersDataList.length; index++) {
                     //默认返回20个
+                    if (fe_markers.length > markers_max_length) {
+                        break;
+                    }
                     try {
                         var item = markersDataList[index];
                         var item_poi = poiDataList[index];
@@ -76,9 +82,6 @@ Page({
                         temp_location.address = item.address;
                         temp_location.type = item_poi.type;
                         fe_markers.push(temp_location);
-                        if (index > markers_max_length) {
-                            break;
-                        }
                     } catch (error) {
                         console.error(error);
                     }
@@ -185,7 +188,7 @@ Page({
                     });
                 },
                 fail: function (info) {
-                    wx.showModal({title: info.errMsg})
+                    wx.showToast({title: info.errMsg, icon: 'loading', duration: 500});
                 }
             });
         } else {
@@ -213,11 +216,11 @@ Page({
             keywords: keywords,
             location: that.data.longitude + ',' + that.data.latitude,
             city: that.data.city,
-            datatype: 'poi',
+            // datatype: 'poi',
             success: function (data) {
                 if (data && data.tips) {
                     that.setData({
-                        tips: data.tips,
+                        tips: filter_empty_location(data),
                         map_top: '300px'
                     });
                 }

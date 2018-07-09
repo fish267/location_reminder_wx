@@ -31,7 +31,7 @@ Page({
                 console.log('天气数据:' + JSON.stringify(data));
             },
             fail: function (info) {
-                // wx.showModal({title:info.errMsg})
+                wx.showToast({title: info.errMsg, icon: 'loading', duration: 500});
             }
         })
 

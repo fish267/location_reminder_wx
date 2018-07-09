@@ -47,5 +47,22 @@ module.exports = {
     generate_random: function (n, m) {
         var c = m - n;
         return Math.floor(Math.random() * c + n);
+    },
+
+    // 删掉不带坐标的站点
+    filter_empty_location: function (data) {
+        var ret = [];
+        if (data && data.tips) {
+            data.tips.forEach(function (item) {
+                if (item.location && item.location != '') {
+                    if (item.address == '') {
+                        item.address = item.district;
+                    }
+                    ret.push(item)
+                }
+            });
+        }
+        console.log("站点查询并过滤:" + JSON.stringify(ret));
+        return ret;
     }
 }
